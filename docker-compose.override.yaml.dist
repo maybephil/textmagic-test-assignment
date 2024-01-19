@@ -1,0 +1,25 @@
+services:
+  pg:
+    ports:
+      - 5432:5432
+    networks:
+      - internet
+  pgadmin:
+    build:
+      context: ./docker
+      dockerfile: pgadmin4.dockerfile
+      args:
+        PG_DATABASE_USER: ${DATABASE_USER}
+        PG_DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    image: localhost/tm/pgadmin4:latest
+    restart: on-failure
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - 8081:80
+    networks:
+      - tm-test-assignment
+      - internet
+    depends_on:
+      - pg

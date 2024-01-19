@@ -1,0 +1,12 @@
+{
+  "Servers": {
+    "0": {
+      "Name": "TextMagic Test Assignment Database",
+      "Group": "TextMagic",
+      "Host": "pg",
+      "Port": 5432,
+      "Username": "${DATABASE_USER}",
+      "MaintenanceDB": "postgres"
+    }
+  }
+}

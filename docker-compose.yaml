@@ -1,0 +1,15 @@
+services:
+  pg:
+    image: docker.io/postgres:16.1-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    networks:
+      - tm-test-assignment
+networks:
+  tm-test-assignment:
+    internal: true
+  internet:
+    internal: false
