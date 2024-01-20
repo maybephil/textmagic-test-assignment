@@ -1,0 +1,11 @@
+[*.{twig,css}]
+indent_size = 2
+
+[*.php]
+ij_php_spaces_within_array_initializer_braces = true
+ij_php_align_multiline_parameters = false
+ij_php_align_multiline_parameters_in_calls = false
+ij_php_comma_after_last_argument = true
+ij_php_comma_after_last_parameter = true
+ij_php_comma_after_last_array_element = true
+ij_php_space_after_type_cast = true

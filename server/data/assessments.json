@@ -1,0 +1,217 @@
+[
+  {
+    "name": "Basic arithmetics",
+    "description": "Test your basic arithmetics skills.",
+    "questions": [
+      {
+        "description": "1 + 1 =",
+        "answers": [
+          {
+            "description": "3",
+            "isValid": false
+          },
+          {
+            "description": "2",
+            "isValid": true
+          },
+          {
+            "description": "0",
+            "isValid": false
+          }
+        ]
+      },
+      {
+        "description": "2 + 2 =",
+        "answers": [
+          {
+            "description": "4",
+            "isValid": true
+          },
+          {
+            "description": "3 + 1",
+            "isValid": true
+          },
+          {
+            "description": "10",
+            "isValid": false
+          }
+        ]
+      },
+      {
+        "description": "3 + 3 =",
+        "answers": [
+          {
+            "description": "1 + 5",
+            "isValid": true
+          },
+          {
+            "description": "1",
+            "isValid": false
+          },
+          {
+            "description": "6",
+            "isValid": true
+          },
+          {
+            "description": "2 + 4",
+            "isValid": true
+          }
+        ]
+      },
+      {
+        "description": "4 + 4 =",
+        "answers": [
+          {
+            "description": "8",
+            "isValid": true
+          },
+          {
+            "description": "4",
+            "isValid": false
+          },
+          {
+            "description": "0",
+            "isValid": false
+          },
+          {
+            "description": "0 + 8",
+            "isValid": true
+          }
+        ]
+      },
+      {
+        "description": "5 + 5 =",
+        "answers": [
+          {
+            "description": "6",
+            "isValid": false
+          },
+          {
+            "description": "18",
+            "isValid": false
+          },
+          {
+            "description": "10",
+            "isValid": true
+          },
+          {
+            "description": "9",
+            "isValid": false
+          },
+          {
+            "description": "0",
+            "isValid": false
+          }
+        ]
+      },
+      {
+        "description": "7 + 7 =",
+        "answers": [
+          {
+            "description": "5",
+            "isValid": false
+          },
+          {
+            "description": "14",
+            "isValid": true
+          }
+        ]
+      },
+      {
+        "description": "8 + 8 =",
+        "answers": [
+          {
+            "description": "16",
+            "isValid": true
+          },
+          {
+            "description": "12",
+            "isValid": false
+          },
+          {
+            "description": "9",
+            "isValid": false
+          },
+          {
+            "description": "5",
+            "isValid": false
+          }
+        ]
+      },
+      {
+        "description": "9 + 9 =",
+        "answers": [
+          {
+            "description": "18",
+            "isValid": true
+          },
+          {
+            "description": "9",
+            "isValid": false
+          },
+          {
+            "description": "17 + 1",
+            "isValid": true
+          },
+          {
+            "description": "2 + 16",
+            "isValid": true
+          }
+        ]
+      },
+      {
+        "description": "10 + 10 =",
+        "answers": [
+          {
+            "description": "0",
+            "isValid": false
+          },
+          {
+            "description": "2",
+            "isValid": false
+          },
+          {
+            "description": "8",
+            "isValid": false
+          },
+          {
+            "description": "20",
+            "isValid": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Test assessment",
+    "description": "Assessment created for testing.",
+    "questions": [
+      {
+        "description": "Question 1",
+        "answers": [
+          {
+            "description": "A valid answer",
+            "isValid": true
+          },
+          {
+            "description": "An invalid answer",
+            "isValid": false
+          }
+        ]
+      },
+      {
+        "description": "Question 2",
+        "answers": [
+          {
+            "description": "An invalid answer",
+            "isValid": false
+          },
+          {
+            "description": "A valid answer",
+            "isValid": true
+          }
+        ]
+      }
+    ]
+  }
+]

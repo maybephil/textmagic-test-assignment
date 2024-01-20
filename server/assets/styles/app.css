@@ -1,0 +1,39 @@
+#wrapper {
+  margin-top: 64px;
+}
+
+.tm-assessment-block-list {
+  margin-top: 24px;
+}
+
+.tm-assessment-block a {
+  text-decoration: none;
+}
+
+.tm-assessment-info {
+  background: #d6d6d6;
+  color: #1a1d20;
+  padding: 16px;
+  border-radius: 5px;
+}
+
+.tm-assessment-info:hover {
+  transition: color, background-color 140ms;
+  color: #000000;
+  background-color: #9e9e9e;
+}
+
+.tm-assessment-info:hover > .tm-assessment-creation-time {
+  transition: color 140ms;
+  color: #1a1d20;
+}
+
+.tm-assessment-info p {
+  margin-bottom: 0;
+}
+
+.tm-assessment-creation-time {
+  font-size: 0.8em;
+  margin-top: 18px;
+  color: #5c636a;
+}

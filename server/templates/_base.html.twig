@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}TextMagic test assignment{% endblock %}</title>
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+    {% endblock %}
+
+    {% block importmap %}
+      {{ importmap('app') }}
+    {% endblock %}
+  </head>
+  <body>
+    <div id="wrapper" class="container-sm">
+      {% block body %}{% endblock %}
+    </div>
+  </body>
+</html>

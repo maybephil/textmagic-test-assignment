@@ -1,0 +1,2 @@
+parameters:
+    app.assessments_data_file_path: '%kernel.project_dir%/data/%env(ASSESSMENTS_DATA_FILE_NAME)%'
