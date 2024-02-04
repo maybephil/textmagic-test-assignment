@@ -5,4 +5,9 @@
     header: 'Select an assessment',
     assessments: assessments
   } only %}
+
+  {% include '_components/index/results-list.html.twig' with {
+    header: 'Results',
+    results: results
+  } only %}
 {% endblock %}

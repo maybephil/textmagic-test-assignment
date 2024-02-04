@@ -1,0 +1,17 @@
+<div class="tm-assessment-list">
+  <h3>{{ header }}</h3>
+
+  <div class="tm-assessment-block-list row">
+    {% if results|length > 0 %}
+      {% for result in results %}
+        {% include '_components/index/item-block.html.twig' with {
+          href_url: '#',
+          block_data_header: result.assessment.name,
+          block_data_creation_time: result.createdAt|date('Y-m-d H:i:s'),
+        } only %}
+      {% endfor %}
+    {% else %}
+      <p><em>You didn't pass any assessment yet.</em></p>
+    {% endif %}
+  </div>
+</div>

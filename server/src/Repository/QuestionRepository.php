@@ -4,13 +4,14 @@ namespace App\Repository;
 
 use App\Entity\Question;
 use App\Repository\Trait\BaseRepositoryMethods;
+use App\Repository\Trait\UuidRepositoryMethods;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Uid\Uuid;
 
 final class QuestionRepository extends ServiceEntityRepository
 {
-    use BaseRepositoryMethods;
+    use BaseRepositoryMethods, UuidRepositoryMethods;
 
     public function __construct(ManagerRegistry $registry)
     {

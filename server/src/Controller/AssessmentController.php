@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Assessment;
 use App\Form\AssessmentQuestionsFormType;
+use App\Service\ResultSubmissionService;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,9 +13,15 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class AssessmentController extends AbstractController
 {
-    #[Route(path: '/{uuidBase32}', name: 'app_assessment_index', methods: [ 'GET' ])]
+    public function __construct(
+        private readonly ResultSubmissionService $submissionService,
+    )
+    {
+    }
+
+    #[Route(path: '/{uuid}', name: 'app_assessment_index', methods: [ 'GET' ])]
     public function indexAction(
-        #[MapEntity(expr: 'repository.findOneByBase32Uuid(uuidBase32)')]
+        #[MapEntity(expr: 'repository.findOneByUuidAsString(uuid)')]
         Assessment $assessment,
     ): Response
     {
@@ -28,9 +35,9 @@ final class AssessmentController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/{uuidBase32}', methods: [ 'POST' ])]
+    #[Route(path: '/{uuid}', methods: [ 'POST' ])]
     public function postAction(
-        #[MapEntity(expr: 'repository.findOneByBase32Uuid(uuidBase32)')]
+        #[MapEntity(expr: 'repository.findOneByUuidAsString(uuid)')]
         Assessment $assessment,
         Request $request,
     ): Response
@@ -41,10 +48,8 @@ final class AssessmentController extends AbstractController
 
         $form->handleRequest($request);
 
-        if (!$form->isValid()) {
-            dd($form->getErrors()->count());
-        }
+        $this->submissionService->submit($assessment, $form->getData());
 
-        dd($form->getData());
+        return $this->redirectToRoute('app_index');
     }
 }

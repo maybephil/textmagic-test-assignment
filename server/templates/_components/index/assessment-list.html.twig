@@ -4,8 +4,11 @@
   <div class="tm-assessment-block-list row">
     {% if assessments|length > 0 %}
       {% for assessment in assessments %}
-        {% include '_components/index/asssessment-block.html.twig' with {
-          assessment: assessment
+        {% include '_components/index/item-block.html.twig' with {
+          href_url: '#',
+          block_data_header: assessment.name,
+          block_data_description: assessment.description,
+          block_data_creation_time: assessment.createdAt|date('Y-m-d H:i:s'),
         } only %}
       {% endfor %}
     {% else %}

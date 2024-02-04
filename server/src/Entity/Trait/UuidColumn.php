@@ -16,8 +16,8 @@ trait UuidColumn
         return $this->uuid;
     }
 
-    public function uuidBase32(): string
+    public function uuidAsString(): string
     {
-        return strtolower($this->uuid->toBase32());
+        return $this->uuid->toRfc4122();
     }
 }

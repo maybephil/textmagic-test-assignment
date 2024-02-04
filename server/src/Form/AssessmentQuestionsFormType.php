@@ -25,14 +25,14 @@ final class AssessmentQuestionsFormType extends AbstractType
         $questions = $this->questions->findAllWithAnswersByAssessmentId($assessmentId);
 
         foreach ($questions as $question) {
-            $builder->add($question->uuidBase32(), ChoiceType::class, [
+            $builder->add($question->uuidAsString(), ChoiceType::class, [
                 'required' => true,
                 'expanded' => true,
                 'multiple' => true,
                 'choices' => $question->answers(),
                 'label' => $question->description(),
                 'choice_label' => 'description',
-                'choice_value' => 'uuidBase32',
+                'choice_value' => 'uuidAsString',
             ]);
         }
 

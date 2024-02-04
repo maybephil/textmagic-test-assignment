@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\AssessmentRepository;
+use App\Repository\ResultRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,6 +12,7 @@ final class IndexController extends AbstractController
 {
     public function __construct(
         private readonly AssessmentRepository $assessments,
+        private readonly ResultRepository $results,
     )
     {
     }
@@ -18,10 +20,9 @@ final class IndexController extends AbstractController
     #[Route('/', name: 'app_index', methods: [ 'GET' ])]
     public function indexAction(): Response
     {
-        $assessments = $this->assessments->findAll();
-
         return $this->render('index.html.twig', [
-            'assessments' => $assessments,
+            'assessments' => $this->assessments->findAll(),
+            'results' => $this->results->findAll(),
         ]);
     }
 }
