@@ -1,5 +1,5 @@
 <div class="col-3 mb-3 tm-assessment-block">
-  <a href="#">
+  <a href="{{ url('app_assessment_index', { uuidBase32: assessment.uuidBase32() }) }}">
     <div class="tm-assessment-info">
       <h5>{{ assessment.name }}</h5>
       <p>{{ assessment.description }}</p>

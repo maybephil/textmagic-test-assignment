@@ -21,8 +21,8 @@ class Assessment
     /**
      * @var Collection<Question>
      */
-    #[ORM\OneToMany(mappedBy: 'test', targetEntity: Question::class, cascade: [ 'all' ])]
-    public Collection $questions;
+    #[ORM\OneToMany(mappedBy: 'assessment', targetEntity: Question::class, cascade: [ 'all' ])]
+    private Collection $questions;
 
     public function __construct(
         Uuid $uuid,

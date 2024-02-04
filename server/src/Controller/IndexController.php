@@ -11,10 +11,11 @@ final class IndexController extends AbstractController
 {
     public function __construct(
         private readonly AssessmentRepository $assessments,
-    ) {
+    )
+    {
     }
 
-    #[Route('/', methods: ['GET'])]
+    #[Route('/', name: 'app_index', methods: [ 'GET' ])]
     public function indexAction(): Response
     {
         $assessments = $this->assessments->findAll();

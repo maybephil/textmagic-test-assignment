@@ -9,10 +9,15 @@ trait IncrementalIdColumn
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name: 'id', type: 'bigint')]
-    private readonly int $id;
+    private readonly string $id;
 
-    public function id(): int
+    public function id(): string
     {
         return $this->id;
+    }
+
+    public function idAsInt(): int
+    {
+        return (int) $this->id;
     }
 }

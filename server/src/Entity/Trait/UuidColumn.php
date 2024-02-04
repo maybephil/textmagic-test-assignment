@@ -18,6 +18,6 @@ trait UuidColumn
 
     public function uuidBase32(): string
     {
-        return $this->uuid->toBase32();
+        return strtolower($this->uuid->toBase32());
     }
 }

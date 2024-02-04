@@ -1,7 +1,7 @@
 {% extends '_base.html.twig' %}
 
 {% block body %}
-  {% include 'partial/assessment-list.html.twig' with {
+  {% include '_components/index/assessment-list.html.twig' with {
     header: 'Select an assessment',
     assessments: assessments
   } only %}

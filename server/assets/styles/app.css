@@ -1,5 +1,5 @@
 #wrapper {
-  margin-top: 64px;
+  margin-top: 24px;
 }
 
 .tm-assessment-block-list {
@@ -36,4 +36,8 @@
   font-size: 0.8em;
   margin-top: 18px;
   color: #5c636a;
+}
+
+.tm-form-check-input {
+  display: block;
 }

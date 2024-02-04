@@ -4,47 +4,23 @@ namespace App\Service;
 
 use App\Entity\Answer;
 use App\Entity\Assessment;
-use App\Entity\Config;
 use App\Entity\Question;
-use App\Exception\AppInitializerException;
-use App\Repository\ConfigRepository;
+use App\Exception\AssessmentsLoadingFailed;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Uid\Factory\UuidFactory;
 
-final readonly class AppInitializerService
+final readonly class AssessmentsLoaderService
 {
-    private const string KEY_APP_INITIALIZED = 'is_app_initialized';
-
     public function __construct(
         private string $assessmentsDataFilePath,
-        private ConfigRepository $configs,
         private EntityManagerInterface $em,
         private UuidFactory $uuid,
     )
     {
     }
 
-    public function isAppInitialized(): bool
-    {
-        return $this->configs->hasValueByKey(
-            self::KEY_APP_INITIALIZED,
-            Config::boolToConfigValue(true),
-        );
-    }
-
-    public function markAppAsInitialized(): void
-    {
-        $this->configs->createOrUpdate(
-            new Config(
-                self::KEY_APP_INITIALIZED,
-                Config::boolToConfigValue(true),
-                new DateTimeImmutable(),
-            ),
-        );
-    }
-
-    public function loadAssessmentsData(): void
+    public function load(): void
     {
         $assessments = $this->readAssessmentsData();
 
@@ -60,6 +36,7 @@ final readonly class AppInitializerService
 
             foreach ($assessmentData['questions'] as $questionData) {
                 $question = new Question(
+                    $this->uuid->create(),
                     $assessment,
                     $questionData['description'],
                     new DateTimeImmutable(),
@@ -69,6 +46,7 @@ final readonly class AppInitializerService
 
                 foreach ($questionData['answers'] as $answerData) {
                     $answer = new Answer(
+                        $this->uuid->create(),
                         $question,
                         $answerData['description'],
                         $answerData['isValid'],
@@ -86,7 +64,7 @@ final readonly class AppInitializerService
     private function readAssessmentsData(): array
     {
         if (!file_exists($this->assessmentsDataFilePath)) {
-            throw AppInitializerException::initialDataFileNotFound($this->assessmentsDataFilePath);
+            throw AssessmentsLoadingFailed::initialDataFileNotFound($this->assessmentsDataFilePath);
         }
 
         return json_decode(

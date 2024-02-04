@@ -18,7 +18,8 @@ services:
       - '../src/DependencyInjection/'
       - '../src/Entity/'
       - '../src/Kernel.php'
+      - '../src/Exception'
 
-  App\Service\AppInitializerService:
+  App\Service\AssessmentsLoaderService:
     arguments:
       $assessmentsDataFilePath: '%app.assessments_data_file_path%'

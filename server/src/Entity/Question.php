@@ -14,25 +14,28 @@ use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 #[ORM\Table(name: 'tm_question')]
-#[ORM\Index(columns: [ 'test_id' ], name: 'idx_tm_question_test_id')]
+#[ORM\Index(columns: [ 'assessment_id' ], name: 'idx_tm_question_assessment_id')]
 class Question
 {
-    use IncrementalIdColumn, CreatedAtColumn;
+    use IncrementalIdColumn, UuidColumn, CreatedAtColumn;
 
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class, cascade: [ 'all' ])]
     private Collection $answers;
 
     public function __construct(
+        Uuid $uuid,
+
         #[ORM\ManyToOne(targetEntity: Assessment::class, cascade: [ 'all' ], inversedBy: 'questions')]
-        #[ORM\JoinColumn(name: 'test_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+        #[ORM\JoinColumn(name: 'assessment_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
         private readonly Assessment $assessment,
 
         #[ORM\Column(name: 'description', type: 'text')]
-        public readonly string $description,
+        private readonly string $description,
 
         DateTimeImmutable $createdAt,
     )
     {
+        $this->uuid = $uuid;
         $this->createdAt = $createdAt;
         $this->answers = new ArrayCollection();
     }

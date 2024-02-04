@@ -1,0 +1,21 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+  <div class="row">
+    <div class="col">
+      <a class="btn btn-dark mb-4" href="{{ url('app_index') }}">&larr; Go back</a>
+    </div>
+  </div>
+  <h3>{{ assessment.name }}</h3>
+  <p><em>{{ assessment.description }}</em></p>
+
+  {% if assessment.questions|length > 0 %}
+    <p class="mt-4 mb-4">Select <em>at least one</em> correct answer.</p>
+
+    {% include '_components/assessment/assessment-questions.html.twig' with {
+      form: form
+    } only %}
+  {% else %}
+    <p class="mt-4 mb-4">This assessment contains no questions.</p>
+  {% endif %}
+{% endblock %}

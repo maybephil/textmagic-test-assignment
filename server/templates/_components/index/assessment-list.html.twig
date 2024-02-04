@@ -1,0 +1,15 @@
+<div class="tm-assessment-list">
+  <h3>{{ header }}</h3>
+
+  <div class="tm-assessment-block-list row">
+    {% if assessments|length > 0 %}
+      {% for assessment in assessments %}
+        {% include '_components/index/asssessment-block.html.twig' with {
+          assessment: assessment
+        } only %}
+      {% endfor %}
+    {% else %}
+      <p><em>No assessments are available at the moment.</em></p>
+    {% endif %}
+  </div>
+</div>
