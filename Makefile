@@ -21,10 +21,20 @@ _composer-install:
 _doctrine-migrate:
 	$(DOCKER_COMPOSE) exec php-fpm php bin/console doctrine:migrations:migrate --no-interaction
 
+_asset-map-install:
+	$(DOCKER_COMPOSE) exec php-fpm php bin/console importmap:install
+
+_asset-map-compile:
+	$(DOCKER_COMPOSE) exec php-fpm php bin/console asset-map:compile
+
+_load_assessments_data:
+	$(DOCKER_COMPOSE) exec php-fpm php bin/console app:load-assessments-data
+
 _common-init: _composer-install _doctrine-migrate
 
-init: _compose_up _common-init
+init: _compose_up _common-init _asset-map-install _asset-map-compile
 init-dev: _compose_override_cp _compose_up _common-init
+load-assessments-data: _load_assessments_data
 down: _compose_down
 down-into-the-sea: _compose_down_into_the_sea
 

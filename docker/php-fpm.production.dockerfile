@@ -8,6 +8,5 @@ RUN apt-get update && \
 RUN docker-php-ext-install pdo pdo_pgsql
 
 COPY --from=docker.io/composer:latest /usr/bin/composer /usr/bin/composer
-COPY server/ /app
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"

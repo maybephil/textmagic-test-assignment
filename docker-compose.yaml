@@ -3,14 +3,16 @@ services:
     image: docker.io/caddy:2.7.6-alpine
     restart: on-failure
     volumes:
-      - ./docker/config/caddy/Caddyfile:/etc/caddy/Caddyfile:ro,z
+      - ./docker/config/caddy/Caddyfile:/etc/caddy/Caddyfile:ro,Z
       - ./server:/app:ro,z
-      - tm-caddy-data:/data:rw,z
+      - tm-caddy-data:/data:rw,Z
     ports:
       - 8080:80
     networks:
       - tm-test-assignment
       - internet
+    depends_on:
+      - php-fpm
   php-fpm:
     build:
       context: .
@@ -25,17 +27,28 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_SERVER_VERSION: '16.1'
+    volumes:
+      - ./server:/app:rw,z
     networks:
       - tm-test-assignment
+      - internet
+    depends_on:
+      pg:
+        condition: service_healthy
   pg:
     image: docker.io/postgres:16.1-alpine
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
-      - tm-pg-data:/var/lib/postgresql/data:rw,z
+      - tm-pg-data:/var/lib/postgresql/data:rw,Z
     networks:
       - tm-test-assignment
 networks:
