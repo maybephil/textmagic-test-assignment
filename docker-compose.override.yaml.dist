@@ -1,4 +1,16 @@
 services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: ./docker/php-fpm.development.dockerfile
+    image: localhost/tm-test-assignment/php-fpm:latest
+    volumes:
+      - ./server:/app:rw,z
+    environment:
+      APP_ENV: 'dev'
+    networks:
+      - tm-test-assignment
+      - internet
   pg:
     ports:
       - 5432:5432
@@ -11,7 +23,7 @@ services:
       args:
         PG_DATABASE_USER: ${DATABASE_USER}
         PG_DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-    image: localhost/tm/pgadmin4:latest
+    image: localhost/tm-test-assignment/pgadmin4:latest
     restart: on-failure
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}

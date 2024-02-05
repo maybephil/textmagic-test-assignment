@@ -1,4 +1,32 @@
 services:
+  caddy:
+    image: docker.io/caddy:2.7.6-alpine
+    restart: on-failure
+    volumes:
+      - ./docker/config/caddy/Caddyfile:/etc/caddy/Caddyfile:ro,z
+      - ./server:/app:ro,z
+      - tm-caddy-data:/data:rw,z
+    ports:
+      - 8080:80
+    networks:
+      - tm-test-assignment
+      - internet
+  php-fpm:
+    build:
+      context: .
+      dockerfile: ./docker/php-fpm.production.dockerfile
+    image: localhost/tm-test-assignment/php-fpm:latest
+    restart: on-failure
+    environment:
+      APP_ENV: 'prod'
+      DATABASE_HOST: 'pg'
+      DATABASE_PORT: 5432
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_SERVER_VERSION: '16.1'
+    networks:
+      - tm-test-assignment
   pg:
     image: docker.io/postgres:16.1-alpine
     restart: always
@@ -6,6 +34,8 @@ services:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - tm-pg-data:/var/lib/postgresql/data:rw,z
     networks:
       - tm-test-assignment
 networks:
@@ -13,3 +43,6 @@ networks:
     internal: true
   internet:
     internal: false
+volumes:
+  tm-pg-data:
+  tm-caddy-data:
