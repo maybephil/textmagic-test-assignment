@@ -12,7 +12,7 @@ final class SubmissionGradingService
     public function gradeCorrectness(array $answers): bool
     {
         foreach ($answers as $answer) {
-            if (!$answer->isValid()) {
+            if (!$answer->isCorrect()) {
                 return false;
             }
         }

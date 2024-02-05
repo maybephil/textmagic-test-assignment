@@ -32,8 +32,8 @@ final class AssessmentQuestionsFormType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'choices' => $question->answers(),
-                'label' => $question->description(),
-                'choice_label' => 'description',
+                'label' => $question->title(),
+                'choice_label' => 'title',
                 'choice_value' => 'uuidAsString',
                 'constraints' => [
                     new NotBlank(),

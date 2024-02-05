@@ -2,11 +2,11 @@
 
 <div class="col-lg-3 mb-3 tm-block">
   <a href="{{ url('app_result_index', { uuid: result_entity.uuidAsString }) }}">
-    <div class="tm-block-data {{ result_entity.isSuccessful ? 'tm-block-accent-green' : 'tm-block-accent-red' }}">
-      <h5>{{ result_entity.assessment.name }}</h5>
+    <div class="tm-block-data {{ result_entity.isCorrect ? 'tm-block-accent-green' : 'tm-block-accent-red' }}">
+      <h5>{{ result_entity.assessment.title }}</h5>
       <p>
-        <span class="badge {{ result_entity.isSuccessful ? 'text-bg-success' : 'text-bg-danger' }}">
-          {{ result_entity.isSuccessful ? 'Correct' : 'Incorrect' }}
+        <span class="badge {{ result_entity.isCorrect ? 'text-bg-success' : 'text-bg-danger' }}">
+          {{ result_entity.isCorrect ? 'Correct' : 'Incorrect' }}
         </span>
       </p>
       <p class="mt-3 mb-3">

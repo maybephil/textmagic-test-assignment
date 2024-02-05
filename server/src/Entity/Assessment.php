@@ -27,8 +27,8 @@ class Assessment
     public function __construct(
         Uuid $uuid,
 
-        #[ORM\Column(name: 'name', type: 'string', length: 120)]
-        private readonly string $name,
+        #[ORM\Column(name: 'title', type: 'string', length: 120)]
+        private readonly string $title,
 
         #[ORM\Column(name: 'description', type: 'text')]
         private readonly string $description,
@@ -41,9 +41,9 @@ class Assessment
         $this->questions = new ArrayCollection();
     }
 
-    public function name(): string
+    public function title(): string
     {
-        return $this->name;
+        return $this->title;
     }
 
     public function description(): string
@@ -57,13 +57,5 @@ class Assessment
     public function questions(): Collection
     {
         return $this->questions;
-    }
-
-    public function numTotalAnswers(): int
-    {
-        return $this->questions->reduce(
-            fn (int $carry, Question $question): int => $carry + $question->answers()->count(),
-            0
-        );
     }
 }

@@ -1,7 +1,7 @@
 <div class="col-lg-3 mb-3 tm-block">
   <a href="{{ url('app_assessment_index', { 'uuid': assessment.uuidAsString }) }}">
     <div class="tm-block-data">
-      <h5>{{ assessment.name }}</h5>
+      <h5>{{ assessment.title }}</h5>
       <p>{{ assessment.description }}</p>
       <p class="tm-block-subdata"><em>Created at:</em> {{ assessment.createdAt|date('Y-m-d h:i:s') }}</p>
     </div>

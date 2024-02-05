@@ -29,8 +29,8 @@ class Question
         #[ORM\JoinColumn(name: 'assessment_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
         private readonly Assessment $assessment,
 
-        #[ORM\Column(name: 'description', type: 'text')]
-        private readonly string $description,
+        #[ORM\Column(name: 'title', type: 'text')]
+        private readonly string $title,
 
         DateTimeImmutable $createdAt,
     )
@@ -45,9 +45,9 @@ class Question
         return $this->assessment;
     }
 
-    public function description(): string
+    public function title(): string
     {
-        return $this->description;
+        return $this->title;
     }
 
     public function answers(): Collection

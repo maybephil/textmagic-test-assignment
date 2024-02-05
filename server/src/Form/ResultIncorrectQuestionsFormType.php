@@ -34,8 +34,8 @@ final class ResultIncorrectQuestionsFormType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'choices' => $question->answers(),
-                'label' => $question->description(),
-                'choice_label' => 'description',
+                'label' => $question->title(),
+                'choice_label' => 'title',
                 'choice_value' => 'uuidAsString',
                 'choice_attr' => fn(Answer $answer) => [
                     'class' => $incorrectAnswerIds->contains($answer->id()) ? 'tm-incorrect-answer-checkbox' : '',

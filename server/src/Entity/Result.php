@@ -22,7 +22,7 @@ class Result
 
         #[ORM\ManyToOne(targetEntity: Assessment::class, cascade: [ 'all' ])]
         #[ORM\JoinColumn(name: 'assessment_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
-        private Assessment $assessment,
+        private readonly Assessment $assessment,
 
         #[ORM\JoinTable(
             name: 'tm_answer_to_result',
@@ -36,8 +36,8 @@ class Result
         #[ORM\ManyToMany(targetEntity: Answer::class, cascade: [ 'all' ])]
         private Collection $answers,
 
-        #[ORM\Column(name: 'is_successful', type: 'boolean')]
-        private bool $isSuccessful,
+        #[ORM\Column(name: 'is_correct', type: 'boolean')]
+        private readonly bool $isCorrect,
 
         DateTimeImmutable $createdAt,
     )
@@ -56,18 +56,18 @@ class Result
         return $this->answers;
     }
 
-    public function isSuccessful(): bool
+    public function isCorrect(): bool
     {
-        return $this->isSuccessful;
+        return $this->isCorrect;
     }
 
     public function correctAnswers(): Collection
     {
-        return $this->answers->filter(fn(Answer $answer) => $answer->isValid());
+        return $this->answers->filter(fn(Answer $answer) => $answer->isCorrect());
     }
 
     public function incorrectAnswers(): Collection
     {
-        return $this->answers->filter(fn(Answer $answer) => !$answer->isValid());
+        return $this->answers->filter(fn(Answer $answer) => !$answer->isCorrect());
     }
 }

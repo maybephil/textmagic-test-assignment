@@ -32,8 +32,8 @@ final class ResultCorrectQuestionsFormType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'choices' => $question->answers(),
-                'label' => $question->description(),
-                'choice_label' => 'description',
+                'label' => $question->title(),
+                'choice_label' => 'title',
                 'choice_value' => 'uuidAsString',
                 'choice_attr' => fn(Answer $answer) => [
                     'class' => $correctAnswersIds->contains($answer->id()) ? 'tm-correct-answer-checkbox' : '',

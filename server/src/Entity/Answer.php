@@ -24,11 +24,11 @@ class Answer
         #[ORM\JoinColumn(name: 'question_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
         private readonly Question $question,
 
-        #[ORM\Column(name: 'description', type: 'text')]
-        private readonly string $description,
+        #[ORM\Column(name: 'title', type: 'text')]
+        private readonly string $title,
 
-        #[ORM\Column(name: 'is_valid', type: 'boolean')]
-        private readonly bool $isValid,
+        #[ORM\Column(name: 'is_correct', type: 'boolean')]
+        private readonly bool $isCorrect,
 
         DateTimeImmutable $createdAt,
     )
@@ -42,13 +42,13 @@ class Answer
         return $this->question;
     }
 
-    public function description(): string
+    public function title(): string
     {
-        return $this->description;
+        return $this->title;
     }
 
-    public function isValid(): bool
+    public function isCorrect(): bool
     {
-        return $this->isValid;
+        return $this->isCorrect;
     }
 }

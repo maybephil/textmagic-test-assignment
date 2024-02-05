@@ -20,8 +20,14 @@ final class ResultRepository extends ServiceEntityRepository
         parent::__construct($registry, Result::class);
     }
 
+    /**
+     * @return Collection<Question>
+     */
     public function findCorrectlyAnsweredQuestionsForResult(Result $result): Collection
     {
+        // This is suboptimal and can be optimized using native queries or a more complex DQL query, but I didn't
+        // have time to think it through. I'm just using Doctrine collections to get the job done.
+
         $correctAnswersIds = $result->correctAnswers()->map(fn(Answer $answer) => $answer->id());
         $incorrectAnswerIds = $result->incorrectAnswers()->map(fn(Answer $answer) => $answer->id());
 
@@ -37,8 +43,13 @@ final class ResultRepository extends ServiceEntityRepository
             );
     }
 
+    /**
+     * @return Collection<Question>
+     */
     public function findIncorrectlyAnsweredQuestionsForResult(Result $result): Collection
     {
+        // Same as in findCorrectlyAnsweredQuestionsForResult, this is suboptimal and can be optimized.
+
         $incorrectAnswerIds = $result->incorrectAnswers()->map(fn(Answer $answer) => $answer->id());
 
         return $result->assessment()->questions()
