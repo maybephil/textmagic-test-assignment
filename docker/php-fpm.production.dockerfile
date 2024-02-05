@@ -3,7 +3,7 @@ FROM docker.io/php:8.3-fpm
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y libpq-dev
+    apt-get install -y unzip libpq-dev
 
 RUN docker-php-ext-install pdo pdo_pgsql
 

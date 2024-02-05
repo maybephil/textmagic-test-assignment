@@ -15,6 +15,9 @@ _compose_down_into_the_sea: .env
 _compose_override_cp:
 	cp docker-compose.override.yaml.dist docker-compose.override.yaml
 
+_compose_remove_override:
+	rm -f -v docker-compose.override.yaml
+
 _composer-install:
 	$(DOCKER_COMPOSE) exec php-fpm composer install --no-interaction
 
@@ -32,7 +35,7 @@ _load_assessments_data:
 
 _common-init: _composer-install _doctrine-migrate
 
-init: _compose_up _common-init _asset-map-install _asset-map-compile
+init: _compose_remove_override _compose_up _common-init _asset-map-install _asset-map-compile
 init-dev: _compose_override_cp _compose_up _common-init
 load-assessments-data: _load_assessments_data
 down: _compose_down
