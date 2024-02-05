@@ -58,4 +58,12 @@ class Assessment
     {
         return $this->questions;
     }
+
+    public function numTotalAnswers(): int
+    {
+        return $this->questions->reduce(
+            fn (int $carry, Question $question): int => $carry + $question->answers()->count(),
+            0
+        );
+    }
 }

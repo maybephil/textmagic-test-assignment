@@ -1,0 +1,24 @@
+{% set result_entity = result.result %}
+
+<div class="col-lg-3 mb-3 tm-block">
+  <a href="{{ url('app_result_index', { uuid: result_entity.uuidAsString }) }}">
+    <div class="tm-block-data {{ result_entity.isSuccessful ? 'tm-block-accent-green' : 'tm-block-accent-red' }}">
+      <h5>{{ result_entity.assessment.name }}</h5>
+      <p>
+        <span class="badge {{ result_entity.isSuccessful ? 'text-bg-success' : 'text-bg-danger' }}">
+          {{ result_entity.isSuccessful ? 'Correct' : 'Incorrect' }}
+        </span>
+      </p>
+      <p class="mt-3 mb-3">
+        {% if result.num_correct_questions == 0 %}
+          <span>None answered correctly</span>
+        {% elseif result.num_correct_questions == result.num_questions %}
+          <span>All answered correctly</span>
+        {% else %}
+          <span>{{ result.num_correct_questions }} correct out of {{ result.num_questions }}</span>
+        {% endif %}
+      </p>
+      <p class="tm-block-subdata"><em>Taken at:</em> {{ result_entity.createdAt|date('Y-m-d h:i:s') }}</p>
+    </div>
+  </a>
+</div>

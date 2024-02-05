@@ -5,12 +5,13 @@ namespace App\Entity;
 use App\Entity\Trait\CreatedAtColumn;
 use App\Entity\Trait\IncrementalIdColumn;
 use App\Entity\Trait\UuidColumn;
+use App\Repository\ResultRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: ResultRepository::class)]
 #[ORM\Table(name: 'tm_result')]
 class Result
 {
@@ -52,7 +53,7 @@ class Result
 
     public function answers(): Collection
     {
-        return $this->answers();
+        return $this->answers;
     }
 
     public function isSuccessful(): bool
@@ -60,12 +61,12 @@ class Result
         return $this->isSuccessful;
     }
 
-    public function validAnswers(): Collection
+    public function correctAnswers(): Collection
     {
         return $this->answers->filter(fn(Answer $answer) => $answer->isValid());
     }
 
-    public function invalidAnswers(): Collection
+    public function incorrectAnswers(): Collection
     {
         return $this->answers->filter(fn(Answer $answer) => !$answer->isValid());
     }

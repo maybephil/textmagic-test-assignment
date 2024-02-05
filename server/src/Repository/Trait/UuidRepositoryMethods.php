@@ -2,12 +2,11 @@
 
 namespace App\Repository\Trait;
 
-use App\Entity\Assessment;
 use Symfony\Component\Uid\Uuid;
 
 trait UuidRepositoryMethods
 {
-    public function findOneByUuidAsString(string $uuid): ?Assessment
+    public function findOneByUuidAsString(string $uuid): ?object
     {
         return $this->findOneBy([
             'uuid' => Uuid::fromRfc4122($uuid),

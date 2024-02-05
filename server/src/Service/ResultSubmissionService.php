@@ -16,33 +16,27 @@ final readonly class ResultSubmissionService
     public function __construct(
         private UuidFactory $uuidFactory,
         private ResultRepository $resultRepository,
+        private SubmissionGradingService $gradingService,
     )
     {
     }
 
     public function submit(Assessment $assessment, array $submissionData): void
     {
+        /** @var Answer[] $answers */
         $answers = array_reduce(
             array_values($submissionData),
             fn (array $carry, array $answers) => [...$carry, ...$answers],
             [],
         );
 
-        $hasInvalidAnswers = array_reduce(
-            $answers,
-            fn (bool $carry, Answer $answer): bool => $carry || !$answer->isValid(),
-            false
-        );
-
-        if (empty($answers)) {
-            throw ResultSubmissionFailed::noAnswersSubmitted($assessment->uuidAsString());
-        }
+        $isCorrect = $this->gradingService->gradeCorrectness($answers);
 
         $result = new Result(
             $this->uuidFactory->create(),
             $assessment,
             new ArrayCollection($answers),
-            !$hasInvalidAnswers,
+            $isCorrect,
             new DateTimeImmutable()
         );
 

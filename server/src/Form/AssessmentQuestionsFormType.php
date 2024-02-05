@@ -8,11 +8,13 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class AssessmentQuestionsFormType extends AbstractType
 {
     public function __construct(
-        private QuestionRepository $questions,
+        private readonly QuestionRepository $questions,
     )
     {
     }
@@ -33,6 +35,13 @@ final class AssessmentQuestionsFormType extends AbstractType
                 'label' => $question->description(),
                 'choice_label' => 'description',
                 'choice_value' => 'uuidAsString',
+                'constraints' => [
+                    new NotBlank(),
+                    new Choice(
+                        choices: $question->answers()->toArray(),
+                        multiple: true,
+                    ),
+                ],
             ]);
         }
 

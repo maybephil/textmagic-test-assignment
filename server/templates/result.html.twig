@@ -1,0 +1,31 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+  <div class="row">
+    <div class="col">
+      <a class="btn btn-dark mb-4" href="{{ url('app_index') }}">&larr; Go back</a>
+    </div>
+  </div>
+  <h3>Result for {{ result.assessment.name }}</h3>
+  <p><em>Taken at:</em> {{ result.createdAt|date('Y-m-d h:i:s') }}</p>
+  <div class="row mt-5">
+    <div class="col">
+      <h5>Questions with correct answers</h5>
+
+      {% if has_correct_questions %}
+        {{ form(correct_questions_form) }}
+      {% else %}
+        <p><em>No questions in this category.</em></p>
+      {% endif %}
+    </div>
+    <div class="col">
+      <h5>Questions with wrong answers</h5>
+
+      {% if has_incorrect_questions %}
+        {{ form(incorrect_questions_form) }}
+      {% else %}
+        <p><em>No questions in this category.</em></p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

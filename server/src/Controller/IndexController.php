@@ -22,7 +22,7 @@ final class IndexController extends AbstractController
     {
         return $this->render('index.html.twig', [
             'assessments' => $this->assessments->findAll(),
-            'results' => $this->results->findAll(),
+            'results' => $this->results->fetchResultsData(),
         ]);
     }
 }

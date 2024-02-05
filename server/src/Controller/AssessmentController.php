@@ -19,7 +19,7 @@ final class AssessmentController extends AbstractController
     {
     }
 
-    #[Route(path: '/{uuid}', name: 'app_assessment_index', methods: [ 'GET' ])]
+    #[Route(path: '/assessment/{uuid}', name: 'app_assessment_index', methods: [ 'GET' ])]
     public function indexAction(
         #[MapEntity(expr: 'repository.findOneByUuidAsString(uuid)')]
         Assessment $assessment,
@@ -35,7 +35,7 @@ final class AssessmentController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/{uuid}', methods: [ 'POST' ])]
+    #[Route(path: '/assessment/{uuid}', methods: [ 'POST' ])]
     public function postAction(
         #[MapEntity(expr: 'repository.findOneByUuidAsString(uuid)')]
         Assessment $assessment,
@@ -47,6 +47,13 @@ final class AssessmentController extends AbstractController
         ]);
 
         $form->handleRequest($request);
+
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render('assessment.html.twig', [
+                'assessment' => $assessment,
+                'form' => $form->createView(),
+            ]);
+        }
 
         $this->submissionService->submit($assessment, $form->getData());
 
